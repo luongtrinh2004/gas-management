@@ -1,0 +1,62 @@
+# ── Dependencies ─────────────────────────────
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ── Next.js build output ─────────────────────
+.next/
+out/
+build/
+dist/
+next-env.d.ts
+*.tsbuildinfo
+
+# ── Environment & secrets (KHÔNG commit) ─────
+.env
+.env.*
+!.env.example
+.deploy.env
+*.pem
+*.key
+
+# ── Dữ liệu chạy local ───────────────────────
+# MongoDB dữ liệu cục bộ (WiredTiger) và tệp người dùng tải lên (ảnh hóa đơn…)
+.data/
+.uploads/
+public/uploads/
+mongod.log
+
+# ── Logs ─────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Test / coverage ──────────────────────────
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# ── Cache công cụ ────────────────────────────
+.eslintcache
+.cache/
+.turbo/
+.vercel/
+
+# ── OS & Editor ──────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# ── Claude Code (cấu hình cục bộ) ────────────
+.claude/settings.local.json
