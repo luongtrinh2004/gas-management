@@ -1,11 +1,15 @@
 // Mô phỏng dữ liệu vận hành ~30 ngày qua CHÍNH API của ứng dụng (đúng quyền từng vai trò),
 // nên công nợ / sổ quỹ / vỏ bình / tồn kho tự khớp với nghiệp vụ.
 // Chạy: npm run seed (DB trống) → chạy app (npm run dev) → npm run simulate
-// Biến môi trường: BASE (mặc định http://localhost:3000), SEED_PASSWORD (mặc định Gas@123456)
+// Biến môi trường: BASE (mặc định http://localhost:3000), SEED_PASSWORD (bắt buộc: mật khẩu của 4 tài khoản đã seed)
 import zlib from 'zlib'
 
 const BASE = process.env.BASE || 'http://localhost:3000'
-const PW = process.env.SEED_PASSWORD || 'Gas@123456'
+const PW = process.env.SEED_PASSWORD
+if (!PW) {
+  console.error('Thiếu SEED_PASSWORD (đặt trong .env.local)')
+  process.exit(1)
+}
 
 // ---------- tiện ích ----------
 let seedN = 20261107

@@ -7,11 +7,12 @@ Next.js 15 (App Router) + Material UI (Materio) + MongoDB (Mongoose). Quy chuẩ
 
 ```bash
 npm install
-cp .env.example .env.local     # MONGODB_URI, AUTH_SECRET
-npm run seed                   # chỉ khi DB trống
+cp .env.example .env.local     # điền MONGODB_URI, AUTH_SECRET, SEED_PASSWORD (không commit file này)
+npm run seed                   # chỉ khi DB trống: tạo 4 tài khoản + sản phẩm
 npm run dev
+npm run simulate               # (tùy chọn) dữ liệu mô phỏng 30 ngày, cần app đang chạy
 ```
-Tài khoản mẫu (mật khẩu `Gas@123456`): `admin@`, `office@`, `driver1@`, `driver2@`, `ketoan@gas.local`.
+Tài khoản seed: `admin@`, `office@`, `driver@`, `accountant@gmail.com`. Mật khẩu là `SEED_PASSWORD` (nếu để trống, `npm run seed` tự sinh và in ra một lần). **Đổi mật khẩu trước khi deploy.**
 Ảnh hóa đơn lưu ở `.uploads/` (đổi bằng `UPLOAD_DIR`).
 
 ## Cấu trúc

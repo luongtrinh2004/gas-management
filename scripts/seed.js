@@ -1,7 +1,8 @@
 // Seed an toàn cho deploy: 4 tài khoản theo vai trò + danh mục sản phẩm. Chỉ chạy khi DB trống.
-// Chạy: npm run seed   (đặt SEED_PASSWORD để đổi mật khẩu khởi tạo — BẮT BUỘC đổi khi lên production)
+// Chạy: npm run seed. Mật khẩu lấy từ SEED_PASSWORD (.env.local); nếu không đặt, sinh ngẫu nhiên và in ra MỘT LẦN.
 // Dữ liệu mô phỏng (khách hàng, đơn, thu chi…): npm run simulate (cần app đang chạy)
 import bcrypt from 'bcryptjs'
+import crypto from 'crypto'
 import mongoose from 'mongoose'
 import { connectDB } from '../src/server/db'
 import { User, Product } from '../src/server/models'
@@ -13,7 +14,9 @@ async function main() {
     process.exit(0)
   }
   await Promise.all(Object.values(mongoose.models).map(m => m.createCollection().catch(() => {}).then(() => m.syncIndexes())))
-  const pw = await bcrypt.hash(process.env.SEED_PASSWORD || 'Gas@123456', 10)
+  const plain = process.env.SEED_PASSWORD || crypto.randomBytes(9).toString('base64url')
+  if (!process.env.SEED_PASSWORD) console.log(`Mật khẩu khởi tạo (chỉ hiện một lần, hãy lưu lại): ${plain}`)
+  const pw = await bcrypt.hash(plain, 10)
   await User.insertMany([
     { email: 'admin@gmail.com', name: 'Nguyễn Văn Hùng', phone: '0912000001', gender: 'male', role: 'admin', passwordHash: pw },
     { email: 'office@gmail.com', name: 'Trần Thị Mai', phone: '0912000002', gender: 'female', role: 'office', passwordHash: pw },
