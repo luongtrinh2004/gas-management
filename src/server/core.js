@@ -135,15 +135,9 @@ export async function dispatch(req, segments) {
 export async function nextCode(prefix, yearly = true) {
   const year = new Date().getFullYear();
   const key = yearly ? `${prefix}-${year}` : prefix;
-  const c = await Counter.findOneAndUpdate(
-    { key },
-    { $inc: { seq: 1 } },
-    { upsert: true, returnDocument: "after" },
-  );
-  let seq = c.seq;
-  let code = `${prefix}${yearly ? `-${year}` : ""}-${String(seq).padStart(4, "0")}`;
+  const prefixPattern = yearly ? `${prefix}-${year}-` : `${prefix}-`;
 
-  // Tự động nhảy qua các mã đã tồn tại (do seed hoặc tạo ngoài) để không bao giờ bị trùng mã
+  // Tìm mã số lớn nhất đang có trong Database để đảm bảo Counter không bao giờ bị lệch sau
   const modelByPrefix = {
     KH: mongoose.models.Customer,
     NCC: mongoose.models.Supplier,
@@ -154,16 +148,44 @@ export async function nextCode(prefix, yearly = true) {
     PC: mongoose.models.CashTx,
   };
   const Model = modelByPrefix[prefix];
+  let maxDbSeq = 0;
   if (Model) {
-    while (await Model.exists({ code })) {
-      seq++;
-      code = `${prefix}${yearly ? `-${year}` : ""}-${String(seq).padStart(4, "0")}`;
-    }
-    if (seq !== c.seq) {
-      await Counter.updateOne({ key }, { $set: { seq } });
-    }
+    try {
+      const lastDoc = await Model.findOne({
+        code: new RegExp(`^${prefixPattern}\\d+$`),
+      })
+        .sort({ code: -1 })
+        .select("code")
+        .lean();
+      if (lastDoc?.code) {
+        const numPart = parseInt(lastDoc.code.split("-").pop(), 10);
+        if (!isNaN(numPart)) {
+          maxDbSeq = numPart;
+        }
+      }
+    } catch {}
   }
-  return code;
+
+  // Đồng bộ Counter: seq luôn >= maxDbSeq
+  const c = await Counter.findOne({ key });
+  let nextSeq = 1;
+  if (c && c.seq >= maxDbSeq) {
+    const updated = await Counter.findOneAndUpdate(
+      { key },
+      { $inc: { seq: 1 } },
+      { returnDocument: "after" },
+    );
+    nextSeq = updated.seq;
+  } else {
+    nextSeq = maxDbSeq + 1;
+    await Counter.findOneAndUpdate(
+      { key },
+      { $set: { seq: nextSeq } },
+      { upsert: true },
+    );
+  }
+
+  return `${prefixPattern}${String(nextSeq).padStart(4, "0")}`;
 }
 
 export async function audit(
