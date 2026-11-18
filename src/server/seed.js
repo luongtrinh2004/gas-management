@@ -150,7 +150,7 @@ export async function seedIfEmpty({ password, force = false }) {
   const dateOnly = (offsetDays) => dayAt(offsetDays).toISOString().slice(0, 10);
 
   // 1. NGƯỜI DÙNG (5 tài khoản cho 4 vai trò)
-  const pw = await bcrypt.hash(password || "Gas@123456", 10);
+  const pw = await bcrypt.hash(password || "12345678", 10);
   const users = await User.insertMany([
     {
       email: "admin@gmail.com",
