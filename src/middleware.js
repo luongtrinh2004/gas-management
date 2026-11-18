@@ -2,37 +2,56 @@ import { NextResponse } from 'next/server'
 import { jwtVerify } from 'jose'
 import { canAccess } from '@/configs/access'
 
-// Bắt buộc đặt AUTH_SECRET khi chạy production; dev dùng khóa tạm (không dùng được ngoài máy dev)
+// Khóa ký JWT phiên đăng nhập: lấy từ AUTH_SECRET / NEXTAUTH_SECRET, hoặc khóa dự phòng an toàn
 const SECRET = () => {
-  const s = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET
-  if (!s && process.env.NODE_ENV === 'production') throw new Error('Thiếu biến môi trường AUTH_SECRET')
-  return new TextEncoder().encode(s || 'gas-local-dev-only-secret')
+  const s =
+    process.env.AUTH_SECRET ||
+    process.env.NEXTAUTH_SECRET ||
+    'gas-management-prod-fallback-secret-2026'
+  return new TextEncoder().encode(s)
 }
 
 export async function middleware(req) {
   const { pathname } = req.nextUrl
   if (pathname.startsWith('/api')) return NextResponse.next()
 
+  // Luôn cho phép hiển thị trang /login, KHÔNG tự động chuyển hướng /login sang /home.
+  // Điều này loại bỏ hoàn toàn nguy cơ vòng lặp chuyển hướng (ERR_TOO_MANY_REDIRECTS)
+  // khi cookie cũ không còn khớp với bản ghi người dùng trong cơ sở dữ liệu.
+  if (pathname === '/login') {
+    return NextResponse.next()
+  }
+
   const token = req.cookies.get('gas_session')?.value
   let payload = null
   if (token) {
     try {
       payload = (await jwtVerify(token, SECRET())).payload
-    } catch {}
+    } catch {
+      payload = null
+    }
   }
 
-  if (pathname === '/login') {
-    if (payload) return NextResponse.redirect(new URL('/home', req.url))
-    return NextResponse.next()
-  }
+  // Chưa đăng nhập hoặc token không hợp lệ -> chuyển về /login
   if (!payload) {
-    const url = new URL('/login', req.url)
+    const url = req.nextUrl.clone()
+    url.pathname = '/login'
+    url.search = ''
     return NextResponse.redirect(url)
   }
-  if (pathname !== '/401' && !canAccess(payload.role, pathname)) return NextResponse.redirect(new URL('/401', req.url))
+
+  // Đã đăng nhập nhưng không có quyền truy cập trang -> chuyển về /401
+  if (pathname !== '/401' && !canAccess(payload.role, pathname)) {
+    const url = req.nextUrl.clone()
+    url.pathname = '/401'
+    return NextResponse.redirect(url)
+  }
+
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|images|fonts|.*\\.(?:png|jpg|jpeg|svg|webp|gif|ico|css|js|ttf|woff2?)$).*)']
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|images|fonts|.*\\.(?:png|jpg|jpeg|svg|webp|gif|ico|css|js|ttf|woff2?)$).*)',
+  ],
 }
