@@ -287,7 +287,7 @@ export async function seedIfEmpty({ password, force = false }) {
   // 5. KHÁCH HÀNG (14 khách hàng thực tế)
   const custs = await Customer.insertMany([
     {
-      code: "KH-0001",
+      code: "AA0001",
       name: "Nhà hàng Hương Việt",
       phone: "0901234501",
       address: "12 Nguyễn Trãi, Thanh Xuân, Hà Nội",
@@ -307,7 +307,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0002",
+      code: "AA0002",
       name: "Quán cơm Bình Dân Lê Lợi",
       phone: "0901234502",
       address: "45 Lê Lợi, Hà Đông, Hà Nội",
@@ -318,7 +318,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0003",
+      code: "AA0003",
       name: "Bếp ăn công nghiệp Phenikaa",
       phone: "0901234503",
       address: "KCN Phenikaa, Yên Nghĩa, Hà Đông, Hà Nội",
@@ -338,7 +338,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0004",
+      code: "AA0004",
       name: "Quán phở Thìn Bờ Hồ",
       phone: "0901234504",
       address: "61 Đinh Tiên Hoàng, Hoàn Kiếm, Hà Nội",
@@ -349,7 +349,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0005",
+      code: "AA0005",
       name: "Trường mầm non Hoa Sen",
       phone: "0901234505",
       address: "8 Trần Phú, Hà Đông, Hà Nội",
@@ -369,7 +369,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0006",
+      code: "AA0006",
       name: "Lẩu nướng Hàn Quốc Seoul",
       phone: "0901234507",
       address: "27 Trần Đăng Ninh, Cầu Giấy, Hà Nội",
@@ -380,7 +380,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0007",
+      code: "AA0007",
       name: "Bệnh viện Đa khoa Tâm Đức",
       phone: "0901234508",
       address: "102 Quang Trung, Hà Đông, Hà Nội",
@@ -397,7 +397,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0008",
+      code: "AA0008",
       name: "Cơm văn phòng Anh Tuấn",
       phone: "0901234509",
       address: "33 Tố Hữu, Nam Từ Liêm, Hà Nội",
@@ -408,7 +408,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0009",
+      code: "AA0009",
       name: "Khách sạn Thiên Phú",
       phone: "0901234510",
       address: "15 Quang Trung, Hà Đông, Hà Nội",
@@ -419,7 +419,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0010",
+      code: "AA0010",
       name: "Quán bia Hơi Hà Nội 68",
       phone: "0901234511",
       address: "68 Nguyễn Khuyến, Hà Đông, Hà Nội",
@@ -430,7 +430,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0011",
+      code: "AA0011",
       name: "Tiệm bánh mì Cô Ba",
       phone: "0901234512",
       address: "9 Chùa Bộc, Đống Đa, Hà Nội",
@@ -441,7 +441,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0012",
+      code: "AA0012",
       name: "Nhà hàng chay An Lạc",
       phone: "0901234514",
       address: "24 Văn Quán, Hà Đông, Hà Nội",
@@ -453,7 +453,7 @@ export async function seedIfEmpty({ password, force = false }) {
       note: "Khách hàng uy tín, thường nộp tiền tạm ứng trước",
     },
     {
-      code: "KH-0013",
+      code: "AA0013",
       name: "Gia đình chị Hoa",
       phone: "0901234513",
       address: "P1205 CT2 Xa La, Hà Đông, Hà Nội",
@@ -464,7 +464,7 @@ export async function seedIfEmpty({ password, force = false }) {
       status: "active",
     },
     {
-      code: "KH-0014",
+      code: "AA0014",
       name: "Anh Minh (hộ gia đình)",
       phone: "0901234506",
       address: "Số 5 ngõ 34 Nguyễn Văn Trỗi, Hà Đông",
@@ -484,7 +484,7 @@ export async function seedIfEmpty({ password, force = false }) {
   const pricesData = [
     // Hương Việt: mua gas 45kg tính theo kg
     {
-      customer: cMap["KH-0001"]._id,
+      customer: cMap["AA0001"]._id,
       product: pGas45._id,
       unit: "kg",
       price: 36500,
@@ -493,7 +493,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0001"]._id,
+      customer: cMap["AA0001"]._id,
       product: pGas45._id,
       unit: "kg",
       price: 37000,
@@ -504,7 +504,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Quán cơm Bình Dân: mua gas 48kg và 12kg
     {
-      customer: cMap["KH-0002"]._id,
+      customer: cMap["AA0002"]._id,
       product: pGas48._id,
       unit: "binh",
       price: 1760000,
@@ -513,7 +513,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0002"]._id,
+      customer: cMap["AA0002"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 435000,
@@ -523,7 +523,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Bếp ăn Phenikaa: mua số lượng lớn
     {
-      customer: cMap["KH-0003"]._id,
+      customer: cMap["AA0003"]._id,
       product: pGas45._id,
       unit: "kg",
       price: 35800,
@@ -532,7 +532,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0003"]._id,
+      customer: cMap["AA0003"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 428000,
@@ -542,7 +542,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Phở Thìn
     {
-      customer: cMap["KH-0004"]._id,
+      customer: cMap["AA0004"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 440000,
@@ -551,7 +551,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0004"]._id,
+      customer: cMap["AA0004"]._id,
       product: pGas45._id,
       unit: "binh",
       price: 1650000,
@@ -561,7 +561,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Mầm non Hoa Sen
     {
-      customer: cMap["KH-0005"]._id,
+      customer: cMap["AA0005"]._id,
       product: pGas45._id,
       unit: "kg",
       price: 36800,
@@ -571,7 +571,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Lẩu Seoul
     {
-      customer: cMap["KH-0006"]._id,
+      customer: cMap["AA0006"]._id,
       product: pGas45._id,
       unit: "kg",
       price: 36300,
@@ -580,7 +580,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0006"]._id,
+      customer: cMap["AA0006"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 432000,
@@ -589,7 +589,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0006"]._id,
+      customer: cMap["AA0006"]._id,
       product: pGasMini._id,
       unit: "thung",
       price: 510000,
@@ -599,7 +599,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Bệnh viện Tâm Đức
     {
-      customer: cMap["KH-0007"]._id,
+      customer: cMap["AA0007"]._id,
       product: pGas48._id,
       unit: "binh",
       price: 1740000,
@@ -609,7 +609,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Cơm Anh Tuấn
     {
-      customer: cMap["KH-0008"]._id,
+      customer: cMap["AA0008"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 438000,
@@ -618,7 +618,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0008"]._id,
+      customer: cMap["AA0008"]._id,
       product: pGas6._id,
       unit: "binh",
       price: 232000,
@@ -628,7 +628,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Khách sạn Thiên Phú
     {
-      customer: cMap["KH-0009"]._id,
+      customer: cMap["AA0009"]._id,
       product: pGas45._id,
       unit: "binh",
       price: 1660000,
@@ -637,7 +637,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0009"]._id,
+      customer: cMap["AA0009"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 436000,
@@ -647,7 +647,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Bia hơi 68
     {
-      customer: cMap["KH-0010"]._id,
+      customer: cMap["AA0010"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 442000,
@@ -657,7 +657,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Bánh mì Cô Ba
     {
-      customer: cMap["KH-0011"]._id,
+      customer: cMap["AA0011"]._id,
       product: pGas6._id,
       unit: "binh",
       price: 236000,
@@ -666,7 +666,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0011"]._id,
+      customer: cMap["AA0011"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 441000,
@@ -676,7 +676,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Chay An Lạc
     {
-      customer: cMap["KH-0012"]._id,
+      customer: cMap["AA0012"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 434000,
@@ -685,7 +685,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0012"]._id,
+      customer: cMap["AA0012"]._id,
       product: pGasMini._id,
       unit: "thung",
       price: 520000,
@@ -695,7 +695,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     // Hộ gia đình
     {
-      customer: cMap["KH-0013"]._id,
+      customer: cMap["AA0013"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 446000,
@@ -704,7 +704,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0014"]._id,
+      customer: cMap["AA0014"]._id,
       product: pGas12._id,
       unit: "binh",
       price: 445000,
@@ -713,7 +713,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAdmin.name,
     },
     {
-      customer: cMap["KH-0014"]._id,
+      customer: cMap["AA0014"]._id,
       product: pGas6._id,
       unit: "binh",
       price: 235000,
@@ -727,7 +727,7 @@ export async function seedIfEmpty({ password, force = false }) {
   // 7. VỎ BÌNH VÀ GAS DƯ ĐẦU KỲ
   await ShellEntry.insertMany([
     {
-      customer: cMap["KH-0001"]._id,
+      customer: cMap["AA0001"]._id,
       product: pGas45._id,
       kind: "opening",
       qty: 8,
@@ -737,7 +737,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAccountant.name,
     },
     {
-      customer: cMap["KH-0003"]._id,
+      customer: cMap["AA0003"]._id,
       product: pGas45._id,
       kind: "opening",
       qty: 16,
@@ -747,7 +747,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAccountant.name,
     },
     {
-      customer: cMap["KH-0002"]._id,
+      customer: cMap["AA0002"]._id,
       product: pGas48._id,
       kind: "opening",
       qty: 4,
@@ -757,7 +757,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAccountant.name,
     },
     {
-      customer: cMap["KH-0002"]._id,
+      customer: cMap["AA0002"]._id,
       product: pGas12._id,
       kind: "opening",
       qty: 6,
@@ -767,7 +767,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAccountant.name,
     },
     {
-      customer: cMap["KH-0006"]._id,
+      customer: cMap["AA0006"]._id,
       product: pGas45._id,
       kind: "opening",
       qty: 6,
@@ -777,7 +777,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAccountant.name,
     },
     {
-      customer: cMap["KH-0007"]._id,
+      customer: cMap["AA0007"]._id,
       product: pGas48._id,
       kind: "opening",
       qty: 8,
@@ -790,7 +790,7 @@ export async function seedIfEmpty({ password, force = false }) {
 
   await ResidualEntry.insertMany([
     {
-      customer: cMap["KH-0003"]._id,
+      customer: cMap["AA0003"]._id,
       product: pGas45._id,
       kind: "opening",
       kg: 38.5,
@@ -800,7 +800,7 @@ export async function seedIfEmpty({ password, force = false }) {
       createdByName: uAccountant.name,
     },
     {
-      customer: cMap["KH-0001"]._id,
+      customer: cMap["AA0001"]._id,
       product: pGas45._id,
       kind: "opening",
       kg: 12.0,
@@ -963,7 +963,7 @@ export async function seedIfEmpty({ password, force = false }) {
     // Ngày -28
     {
       offset: -28,
-      cCode: "KH-0001",
+      cCode: "AA0001",
       p: pGas45,
       unit: "kg",
       price: 36500,
@@ -976,7 +976,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -28,
-      cCode: "KH-0002",
+      cCode: "AA0002",
       p: pGas48,
       unit: "binh",
       price: 1760000,
@@ -988,7 +988,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -27,
-      cCode: "KH-0004",
+      cCode: "AA0004",
       p: pGas12,
       unit: "binh",
       price: 440000,
@@ -1001,7 +1001,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -26,
-      cCode: "KH-0003",
+      cCode: "AA0003",
       p: pGas45,
       unit: "kg",
       price: 35800,
@@ -1014,7 +1014,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -25,
-      cCode: "KH-0006",
+      cCode: "AA0006",
       p: pGas45,
       unit: "kg",
       price: 36300,
@@ -1027,7 +1027,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -25,
-      cCode: "KH-0006",
+      cCode: "AA0006",
       p: pGasMini,
       unit: "thung",
       price: 510000,
@@ -1040,7 +1040,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -24,
-      cCode: "KH-0007",
+      cCode: "AA0007",
       p: pGas48,
       unit: "binh",
       price: 1740000,
@@ -1052,7 +1052,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -23,
-      cCode: "KH-0008",
+      cCode: "AA0008",
       p: pGas12,
       unit: "binh",
       price: 438000,
@@ -1065,7 +1065,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -22,
-      cCode: "KH-0010",
+      cCode: "AA0010",
       p: pGas12,
       unit: "binh",
       price: 442000,
@@ -1078,7 +1078,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -22,
-      cCode: "KH-0005",
+      cCode: "AA0005",
       p: pGas45,
       unit: "kg",
       price: 36800,
@@ -1092,7 +1092,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -21,
-      cCode: "KH-0011",
+      cCode: "AA0011",
       p: pGas6,
       unit: "binh",
       price: 236000,
@@ -1105,7 +1105,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -20,
-      cCode: "KH-0001",
+      cCode: "AA0001",
       p: pGas45,
       unit: "kg",
       price: 36500,
@@ -1119,7 +1119,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -20,
-      cCode: "KH-0014",
+      cCode: "AA0014",
       p: pGas12,
       unit: "binh",
       price: 445000,
@@ -1132,7 +1132,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -19,
-      cCode: "KH-0009",
+      cCode: "AA0009",
       p: pGas45,
       unit: "binh",
       price: 1660000,
@@ -1144,7 +1144,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -18,
-      cCode: "KH-0003",
+      cCode: "AA0003",
       p: pGas45,
       unit: "kg",
       price: 35800,
@@ -1157,7 +1157,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -18,
-      cCode: "KH-0002",
+      cCode: "AA0002",
       p: pGas12,
       unit: "binh",
       price: 435000,
@@ -1170,7 +1170,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -17,
-      cCode: "KH-0004",
+      cCode: "AA0004",
       p: pGas12,
       unit: "binh",
       price: 440000,
@@ -1183,7 +1183,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -16,
-      cCode: "KH-0012",
+      cCode: "AA0012",
       p: pGas12,
       unit: "binh",
       price: 434000,
@@ -1196,7 +1196,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -15,
-      cCode: "KH-0013",
+      cCode: "AA0013",
       p: pGas12,
       unit: "binh",
       price: 446000,
@@ -1209,7 +1209,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -15,
-      cCode: "KH-0007",
+      cCode: "AA0007",
       p: pGas48,
       unit: "binh",
       price: 1740000,
@@ -1221,7 +1221,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -14,
-      cCode: "KH-0006",
+      cCode: "AA0006",
       p: pGas45,
       unit: "kg",
       price: 36300,
@@ -1234,7 +1234,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -13,
-      cCode: "KH-0008",
+      cCode: "AA0008",
       p: pGas12,
       unit: "binh",
       price: 438000,
@@ -1247,7 +1247,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -12,
-      cCode: "KH-0001",
+      cCode: "AA0001",
       p: pGas45,
       unit: "kg",
       price: 36500,
@@ -1261,7 +1261,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -12,
-      cCode: "KH-0010",
+      cCode: "AA0010",
       p: pGas12,
       unit: "binh",
       price: 442000,
@@ -1274,7 +1274,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -11,
-      cCode: "KH-0003",
+      cCode: "AA0003",
       p: pGas45,
       unit: "kg",
       price: 35800,
@@ -1287,7 +1287,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -10,
-      cCode: "KH-0002",
+      cCode: "AA0002",
       p: pGas48,
       unit: "binh",
       price: 1760000,
@@ -1299,7 +1299,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -10,
-      cCode: "KH-0005",
+      cCode: "AA0005",
       p: pGas45,
       unit: "kg",
       price: 36800,
@@ -1312,7 +1312,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -9,
-      cCode: "KH-0004",
+      cCode: "AA0004",
       p: pGas12,
       unit: "binh",
       price: 440000,
@@ -1325,7 +1325,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -8,
-      cCode: "KH-0011",
+      cCode: "AA0011",
       p: pGas12,
       unit: "binh",
       price: 441000,
@@ -1338,7 +1338,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -7,
-      cCode: "KH-0009",
+      cCode: "AA0009",
       p: pGas45,
       unit: "binh",
       price: 1660000,
@@ -1350,7 +1350,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -6,
-      cCode: "KH-0006",
+      cCode: "AA0006",
       p: pGasMini,
       unit: "thung",
       price: 510000,
@@ -1363,7 +1363,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -5,
-      cCode: "KH-0001",
+      cCode: "AA0001",
       p: pGas45,
       unit: "kg",
       price: 37000,
@@ -1377,7 +1377,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -5,
-      cCode: "KH-0003",
+      cCode: "AA0003",
       p: pGas45,
       unit: "kg",
       price: 35800,
@@ -1389,7 +1389,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -4,
-      cCode: "KH-0007",
+      cCode: "AA0007",
       p: pGas48,
       unit: "binh",
       price: 1740000,
@@ -1401,7 +1401,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -3,
-      cCode: "KH-0008",
+      cCode: "AA0008",
       p: pGas12,
       unit: "binh",
       price: 438000,
@@ -1414,7 +1414,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -3,
-      cCode: "KH-0002",
+      cCode: "AA0002",
       p: pGas12,
       unit: "binh",
       price: 435000,
@@ -1426,7 +1426,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -2,
-      cCode: "KH-0010",
+      cCode: "AA0010",
       p: pGas12,
       unit: "binh",
       price: 442000,
@@ -1439,7 +1439,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -2,
-      cCode: "KH-0004",
+      cCode: "AA0004",
       p: pGas12,
       unit: "binh",
       price: 440000,
@@ -1454,7 +1454,7 @@ export async function seedIfEmpty({ password, force = false }) {
     // --- Đơn đã hủy ---
     {
       offset: -15,
-      cCode: "KH-0002",
+      cCode: "AA0002",
       p: pGas12,
       unit: "binh",
       price: 435000,
@@ -1464,7 +1464,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: -6,
-      cCode: "KH-0008",
+      cCode: "AA0008",
       p: pGas6,
       unit: "binh",
       price: 232000,
@@ -1476,7 +1476,7 @@ export async function seedIfEmpty({ password, force = false }) {
     // --- Đơn CẦN XỬ LÝ (need_fix) để test màn hình đối soát/sửa lỗi ---
     {
       offset: -1,
-      cCode: "KH-0002",
+      cCode: "AA0002",
       p: pGas48,
       unit: "binh",
       price: 1760000,
@@ -1492,7 +1492,7 @@ export async function seedIfEmpty({ password, force = false }) {
     // --- 3 Đơn CHỜ ĐỐI SOÁT (pending_review) để test duyệt ngay trên /reconcile ---
     {
       offset: -1,
-      cCode: "KH-0003",
+      cCode: "AA0003",
       p: pGas45,
       unit: "kg",
       price: 35800,
@@ -1505,7 +1505,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: 0,
-      cCode: "KH-0006",
+      cCode: "AA0006",
       p: pGas45,
       unit: "kg",
       price: 36300,
@@ -1518,7 +1518,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: 0,
-      cCode: "KH-0004",
+      cCode: "AA0004",
       p: pGas12,
       unit: "binh",
       price: 440000,
@@ -1533,7 +1533,7 @@ export async function seedIfEmpty({ password, force = false }) {
     // --- 2 Đơn ĐANG GIAO (delivering) ---
     {
       offset: 0,
-      cCode: "KH-0009",
+      cCode: "AA0009",
       p: pGas45,
       unit: "binh",
       price: 1660000,
@@ -1543,7 +1543,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: 0,
-      cCode: "KH-0008",
+      cCode: "AA0008",
       p: pGas12,
       unit: "binh",
       price: 438000,
@@ -1555,7 +1555,7 @@ export async function seedIfEmpty({ password, force = false }) {
     // --- 2 Đơn ĐÃ PHÂN CÔNG (assigned) ---
     {
       offset: 0,
-      cCode: "KH-0001",
+      cCode: "AA0001",
       p: pGas45,
       unit: "kg",
       price: 37000,
@@ -1565,7 +1565,7 @@ export async function seedIfEmpty({ password, force = false }) {
     },
     {
       offset: 0,
-      cCode: "KH-0010",
+      cCode: "AA0010",
       p: pGas12,
       unit: "binh",
       price: 442000,
@@ -1577,7 +1577,7 @@ export async function seedIfEmpty({ password, force = false }) {
     // --- 1 Đơn MỚI CHỜ PHÂN CÔNG (waiting_assign) ---
     {
       offset: 0,
-      cCode: "KH-0011",
+      cCode: "AA0011",
       p: pGas12,
       unit: "binh",
       price: 441000,
@@ -1695,8 +1695,8 @@ export async function seedIfEmpty({ password, force = false }) {
     amount: 2500000,
     channel: "company_account",
     content: `Thu công nợ Quán cơm Bình Dân Lê Lợi đợt 1`,
-    customer: cMap["KH-0002"]._id,
-    customerName: cMap["KH-0002"].name,
+    customer: cMap["AA0002"]._id,
+    customerName: cMap["AA0002"].name,
     refType: "manual",
     attachments: [sampleImages[1]],
     createdBy: uAccountant._id,
@@ -1713,8 +1713,8 @@ export async function seedIfEmpty({ password, force = false }) {
     amount: 20000000,
     channel: "company_account",
     content: `Thanh toán chuyển khoản công nợ Bếp ăn Phenikaa`,
-    customer: cMap["KH-0003"]._id,
-    customerName: cMap["KH-0003"].name,
+    customer: cMap["AA0003"]._id,
+    customerName: cMap["AA0003"].name,
     refType: "manual",
     attachments: [sampleImages[2]],
     createdBy: uAccountant._id,
@@ -1731,8 +1731,8 @@ export async function seedIfEmpty({ password, force = false }) {
     amount: 10000000,
     channel: "company_account",
     content: `Bệnh viện Tâm Đức thanh toán tiền gas đợt 1/tháng`,
-    customer: cMap["KH-0007"]._id,
-    customerName: cMap["KH-0007"].name,
+    customer: cMap["AA0007"]._id,
+    customerName: cMap["AA0007"].name,
     refType: "manual",
     attachments: [sampleImages[3]],
     createdBy: uAccountant._id,
@@ -1751,8 +1751,8 @@ export async function seedIfEmpty({ password, force = false }) {
     amount: 3500000,
     channel: "company_account",
     content: `Nhà hàng chay An Lạc chuyển khoản tiền tạm ứng tiền gas tháng này`,
-    customer: cMap["KH-0012"]._id,
-    customerName: cMap["KH-0012"].name,
+    customer: cMap["AA0012"]._id,
+    customerName: cMap["AA0012"].name,
     refType: "manual",
     attachments: [sampleImages[0]],
     createdBy: uAccountant._id,
@@ -1761,7 +1761,7 @@ export async function seedIfEmpty({ password, force = false }) {
 
   // Điều chỉnh công nợ: Chiết khấu hỗ trợ khách quen Quán cơm Bình Dân
   await DebtAdjust.create({
-    customer: cMap["KH-0002"]._id,
+    customer: cMap["AA0002"]._id,
     date: dayAt(-3, 16, 0),
     amount: -150000,
     reason: "Chiết khấu hỗ trợ quán cơm khách quen theo chính sách cửa hàng",
@@ -1771,7 +1771,7 @@ export async function seedIfEmpty({ password, force = false }) {
 
   // Đối trừ gas dư: Bếp ăn Phenikaa
   await ResidualEntry.create({
-    customer: cMap["KH-0003"]._id,
+    customer: cMap["AA0003"]._id,
     product: pGas45._id,
     kind: "offset",
     kg: -25.0,
@@ -1990,8 +1990,8 @@ export async function seedIfEmpty({ password, force = false }) {
     amount: mats[0].defaultPrice * 2,
     paidAmount: mats[0].defaultPrice * 2,
     payMethod: "cash",
-    customer: cMap["KH-0001"]._id,
-    customerName: cMap["KH-0001"].name,
+    customer: cMap["AA0001"]._id,
+    customerName: cMap["AA0001"].name,
     note: "Thay mới 2 van điều áp cho hệ thống bếp",
     createdBy: uOffice._id,
     createdByName: uOffice.name,
@@ -2006,8 +2006,8 @@ export async function seedIfEmpty({ password, force = false }) {
     amount: 0,
     paidAmount: 0,
     payMethod: "cash",
-    customer: cMap["KH-0004"]._id,
-    customerName: cMap["KH-0004"].name,
+    customer: cMap["AA0004"]._id,
+    customerName: cMap["AA0004"].name,
     note: "Tặng dây dẫn gas mới tri ân khách quen",
     createdBy: uOffice._id,
     createdByName: uOffice.name,

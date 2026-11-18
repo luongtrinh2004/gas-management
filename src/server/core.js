@@ -132,14 +132,73 @@ export async function dispatch(req, segments) {
 }
 
 // ===== Helpers =====
+
+// Mã khách hàng dạng 2 chữ cái + 4 chữ số: AA0001 ... AA9999 -> AB0001 ... FG3421
+export function seqToCustomerCode(seq) {
+  const s = Math.max(1, Number(seq) || 1);
+  const idx = s - 1;
+  const pairIndex = Math.floor(idx / 9999);
+  const num = (idx % 9999) + 1;
+  const c1 = String.fromCharCode(65 + (Math.floor(pairIndex / 26) % 26));
+  const c2 = String.fromCharCode(65 + (pairIndex % 26));
+  return `${c1}${c2}${String(num).padStart(4, "0")}`;
+}
+
+export function customerCodeToSeq(code) {
+  const m = String(code || "")
+    .trim()
+    .toUpperCase()
+    .match(/^([A-Z]{2})(\d{4})$/);
+  if (!m) return 0;
+  const p1 = m[1].charCodeAt(0) - 65;
+  const p2 = m[1].charCodeAt(1) - 65;
+  const pairIndex = p1 * 26 + p2;
+  const num = parseInt(m[2], 10);
+  return pairIndex * 9999 + num;
+}
+
 export async function nextCode(prefix, yearly = true) {
+  // Riêng mã khách hàng: chuẩn AA0001, AA0002 ... AB0001 ... FG3421 ...
+  if (prefix === "KH") {
+    let maxSeq = 0;
+    try {
+      const allCustCodes = await mongoose.models.Customer.find({
+        code: /^[A-Z]{2}\d{4}$/,
+      })
+        .select("code")
+        .lean();
+      for (const c of allCustCodes) {
+        const s = customerCodeToSeq(c.code);
+        if (s > maxSeq) maxSeq = s;
+      }
+    } catch {}
+
+    const counter = await Counter.findOne({ key: "KH" });
+    let nextSeq = 1;
+    if (counter && counter.seq >= maxSeq) {
+      const updated = await Counter.findOneAndUpdate(
+        { key: "KH" },
+        { $inc: { seq: 1 } },
+        { returnDocument: "after" },
+      );
+      nextSeq = updated.seq;
+    } else {
+      nextSeq = maxSeq + 1;
+      await Counter.findOneAndUpdate(
+        { key: "KH" },
+        { $set: { seq: nextSeq } },
+        { upsert: true },
+      );
+    }
+    return seqToCustomerCode(nextSeq);
+  }
+
   const year = new Date().getFullYear();
   const key = yearly ? `${prefix}-${year}` : prefix;
   const prefixPattern = yearly ? `${prefix}-${year}-` : `${prefix}-`;
 
   // Tìm mã số lớn nhất đang có trong Database để đảm bảo Counter không bao giờ bị lệch sau
   const modelByPrefix = {
-    KH: mongoose.models.Customer,
     NCC: mongoose.models.Supplier,
     SP: mongoose.models.Product,
     DH: mongoose.models.Order,

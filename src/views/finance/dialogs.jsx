@@ -242,7 +242,20 @@ export function PaymentDialog({
 
             <Grid size={{ xs: 12, sm: 6 }}>
               <MoneyField
-                label="Số tiền thu *"
+                label={
+                  <span>
+                    Số tiền thu
+                    <span
+                      style={{
+                        color: "var(--mui-palette-error-main)",
+                        fontWeight: "bold",
+                        marginLeft: 4,
+                      }}
+                    >
+                      *
+                    </span>
+                  </span>
+                }
                 value={amount}
                 error={Boolean(fieldErrors.amount)}
                 helperText={fieldErrors.amount}
@@ -254,12 +267,48 @@ export function PaymentDialog({
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
-              <DateField label="Ngày thu *" value={date} onChange={setDate} />
+              <DateField
+                label={
+                  <span>
+                    Ngày thu
+                    <span
+                      style={{
+                        color: "var(--mui-palette-error-main)",
+                        fontWeight: "bold",
+                        marginLeft: 4,
+                      }}
+                    >
+                      *
+                    </span>
+                  </span>
+                }
+                value={date}
+                error={Boolean(fieldErrors.date)}
+                helperText={fieldErrors.date}
+                onChange={(val) => {
+                  setDate(val);
+                  if (fieldErrors.date)
+                    setFieldErrors((s) => ({ ...s, date: undefined }));
+                }}
+              />
             </Grid>
 
             <Grid size={{ xs: 12, sm: 6 }}>
               <SelectField
-                label="Hình thức thu *"
+                label={
+                  <span>
+                    Hình thức thu
+                    <span
+                      style={{
+                        color: "var(--mui-palette-error-main)",
+                        fontWeight: "bold",
+                        marginLeft: 4,
+                      }}
+                    >
+                      *
+                    </span>
+                  </span>
+                }
                 options={toOptions(PAY_METHODS)}
                 allowEmpty={false}
                 value={channel}
@@ -646,7 +695,20 @@ export function CashDialog({ open, onClose, type = "in", edit }) {
           <Grid container spacing={4} className="pbs-2">
             <Grid size={{ xs: 12, sm: 6 }}>
               <SelectField
-                label="Danh mục *"
+                label={
+                  <span>
+                    Danh mục
+                    <span
+                      style={{
+                        color: "var(--mui-palette-error-main)",
+                        fontWeight: "bold",
+                        marginLeft: 4,
+                      }}
+                    >
+                      *
+                    </span>
+                  </span>
+                }
                 options={toOptions(cats)}
                 allowEmpty={false}
                 value={v.category}
@@ -655,14 +717,42 @@ export function CashDialog({ open, onClose, type = "in", edit }) {
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <DateField
-                label="Ngày *"
+                label={
+                  <span>
+                    Ngày
+                    <span
+                      style={{
+                        color: "var(--mui-palette-error-main)",
+                        fontWeight: "bold",
+                        marginLeft: 4,
+                      }}
+                    >
+                      *
+                    </span>
+                  </span>
+                }
                 value={v.date}
+                error={Boolean(fieldErrors.date)}
+                helperText={fieldErrors.date}
                 onChange={(x) => set("date", x)}
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <MoneyField
-                label="Số tiền *"
+                label={
+                  <span>
+                    Số tiền
+                    <span
+                      style={{
+                        color: "var(--mui-palette-error-main)",
+                        fontWeight: "bold",
+                        marginLeft: 4,
+                      }}
+                    >
+                      *
+                    </span>
+                  </span>
+                }
                 value={v.amount}
                 error={Boolean(fieldErrors.amount)}
                 helperText={fieldErrors.amount}

@@ -53,16 +53,52 @@ export default function FormDialog({
     const newFieldErrors = {};
     for (const f of fields) {
       if (f.hidden?.(values)) continue;
-      if (f.required && (values[f.name] === "" || values[f.name] == null)) {
+      const val = values[f.name];
+      if (
+        f.required &&
+        (val === "" || val == null || (typeof val === "string" && !val.trim()))
+      ) {
+        const cleanLabel = f.label.replace(/\s*\*$/, "").trim();
+        newFieldErrors[f.name] = `Vui lòng nhập ${cleanLabel.toLowerCase()}`;
+      }
+      if (f.type === "money" && val !== "" && val != null && Number(val) < 0) {
         newFieldErrors[f.name] =
-          `Vui lòng nhập ${f.label.replace(/\s*\*$/, "").toLowerCase()}`;
+          `${f.label.replace(/\s*\*$/, "").trim()} không được là số âm`;
+      }
+      if (
+        f.type === "number" &&
+        val !== "" &&
+        val != null &&
+        Number(val) < 0 &&
+        f.min !== undefined &&
+        f.min >= 0
+      ) {
+        newFieldErrors[f.name] =
+          `${f.label.replace(/\s*\*$/, "").trim()} không được là số âm`;
+      }
+      if (
+        f.type === "password" &&
+        f.required &&
+        val &&
+        String(val).length < 8
+      ) {
+        newFieldErrors[f.name] = "Mật khẩu phải có tối thiểu 8 ký tự";
+      }
+      if (f.name === "email" && val && typeof val === "string") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(val.trim())) {
+          newFieldErrors[f.name] =
+            "Email không đúng định dạng (VD: example@gmail.com)";
+        }
       }
     }
     if (Object.keys(newFieldErrors).length > 0) {
       setFieldErrors(newFieldErrors);
-      const firstLabel =
-        fields.find((f) => newFieldErrors[f.name])?.label || "";
-      setError(`Vui lòng nhập đầy đủ: ${firstLabel.replace(/\s*\*$/, "")}`);
+      const firstField = fields.find((f) => newFieldErrors[f.name]);
+      const firstLabel = firstField?.label || Object.keys(newFieldErrors)[0];
+      setError(
+        `Vui lòng kiểm tra lại: ${firstLabel.replace(/\s*\*$/, "").trim()} (${Object.values(newFieldErrors)[0]})`,
+      );
       return;
     }
 
@@ -113,8 +149,25 @@ export default function FormDialog({
               if (f.hidden?.(values)) return null;
               const hasError = Boolean(fieldErrors[f.name]);
               const helper = fieldErrors[f.name] || f.helper;
+              const cleanLabel = f.label.replace(/\s*\*$/, "").trim();
+              const labelNode = (
+                <span>
+                  {cleanLabel}
+                  {f.required && (
+                    <span
+                      style={{
+                        color: "var(--mui-palette-error-main)",
+                        fontWeight: "bold",
+                        marginLeft: 4,
+                      }}
+                    >
+                      *
+                    </span>
+                  )}
+                </span>
+              );
               const common = {
-                label: f.label + (f.required ? " *" : ""),
+                label: labelNode,
                 error: hasError,
                 helperText: helper,
               };
