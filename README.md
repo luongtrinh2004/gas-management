@@ -8,11 +8,12 @@ Next.js 15 (App Router) + Material UI (Materio) + MongoDB (Mongoose). Quy chuẩ
 ```bash
 npm install
 cp .env.example .env.local     # điền MONGODB_URI, AUTH_SECRET, SEED_PASSWORD (không commit file này)
-npm run seed                   # chỉ khi DB trống: tạo 4 tài khoản + sản phẩm
+npm run seed                   # tạo tài khoản + nạp đầy đủ dữ liệu mẫu (khách hàng, đơn 30 ngày, tồn kho, thu chi...)
+npm run seed:force             # (tùy chọn) ép buộc xóa và nạp lại toàn bộ dữ liệu mẫu
 npm run dev
-npm run simulate               # (tùy chọn) dữ liệu mô phỏng 30 ngày, cần app đang chạy
 ```
-Tài khoản seed: `admin@`, `office@`, `driver@`, `accountant@gmail.com`. Mật khẩu là `SEED_PASSWORD` (nếu để trống, `npm run seed` tự sinh và in ra một lần). **Đổi mật khẩu trước khi deploy.**
+Tài khoản seed: `admin@`, `office@`, `driver@`, `driver2@`, `accountant@gmail.com`. Mật khẩu mặc định là `Gas@123456` (hoặc lấy từ `SEED_PASSWORD`). **Đổi mật khẩu trước khi deploy.**
+Khi deploy lên server/hosting, chỉ cần đặt biến môi trường `SEED_ON_START=true` và `SEED_PASSWORD=Gas@123456`, hệ thống sẽ tự động khởi tạo dữ liệu mẫu phong phú ngay lần đầu khởi động.
 Ảnh hóa đơn lưu ở `.uploads/` (đổi bằng `UPLOAD_DIR`).
 
 ## Cấu trúc

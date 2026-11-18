@@ -12,6 +12,7 @@
     "start": "next start -H 0.0.0.0",
     "lint": "next lint",
     "seed": "tsx --env-file-if-exists=.env.local scripts/seed.js",
+    "seed:force": "tsx --env-file-if-exists=.env.local scripts/seed.js --force",
     "simulate": "node --env-file-if-exists=.env.local scripts/simulate.mjs",
     "lint:fix": "next lint --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
