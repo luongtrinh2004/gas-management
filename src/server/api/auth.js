@@ -134,10 +134,37 @@ get("/users/options", ["admin", "office", "accountant"], async ({ query }) => {
 });
 
 post("/users", ADMIN, async ({ session, body }) => {
-  if (!body.password || String(body.password).length < 8)
-    throw bad("Mật khẩu tối thiểu 8 ký tự");
+  const email = String(body.email || "")
+    .toLowerCase()
+    .trim();
+  if (!email)
+    throw bad("Vui lòng nhập email", { email: "Vui lòng nhập email" });
+  const dupEmail = await User.findOne({ email });
+  if (dupEmail) {
+    throw bad(`Email "${email}" đã được sử dụng bởi "${dupEmail.name}"`, {
+      email: "Email này đã được sử dụng",
+    });
+  }
+  if (body.phone && String(body.phone).trim()) {
+    const phone = String(body.phone).trim();
+    const dupPhone = await User.findOne({ phone });
+    if (dupPhone) {
+      throw bad(
+        `Số điện thoại "${phone}" đã được sử dụng bởi "${dupPhone.name}"`,
+        {
+          phone: "Số điện thoại này đã được sử dụng",
+        },
+      );
+    }
+  }
+  if (!body.password || String(body.password).length < 8) {
+    throw bad("Mật khẩu tối thiểu 8 ký tự", {
+      password: "Mật khẩu tối thiểu 8 ký tự",
+    });
+  }
   const u = await User.create({
     ...pick(body, ["email", "name", "phone", "gender", "role", "status"]),
+    email,
     passwordHash: await bcrypt.hash(body.password, 10),
   });
   await audit(
@@ -159,7 +186,30 @@ put("/users/:id", ADMIN, async ({ session, params, body }) => {
     String(u._id) === session.id &&
     (body.status === "disabled" || (body.role && body.role !== u.role))
   )
-    throw bad("Không thể tự khóa hoặc đổi vai trò của chính mình");
+    throw bad("Không thể tự khóa hoặc đổi vai trò của chính mình", {
+      status: "Không thể tự khóa hoặc đổi vai trò của chính mình",
+    });
+  if (body.email) {
+    const email = String(body.email).toLowerCase().trim();
+    const dupEmail = await User.findOne({ email, _id: { $ne: u._id } });
+    if (dupEmail) {
+      throw bad(`Email "${email}" đã được sử dụng bởi "${dupEmail.name}"`, {
+        email: "Email này đã được sử dụng",
+      });
+    }
+  }
+  if (body.phone && String(body.phone).trim()) {
+    const phone = String(body.phone).trim();
+    const dupPhone = await User.findOne({ phone, _id: { $ne: u._id } });
+    if (dupPhone) {
+      throw bad(
+        `Số điện thoại "${phone}" đã được sử dụng bởi "${dupPhone.name}"`,
+        {
+          phone: "Số điện thoại này đã được sử dụng",
+        },
+      );
+    }
+  }
   const before = { role: u.role, status: u.status };
   Object.assign(
     u,
@@ -167,7 +217,9 @@ put("/users/:id", ADMIN, async ({ session, params, body }) => {
   );
   if (body.password) {
     if (String(body.password).length < 8)
-      throw bad("Mật khẩu tối thiểu 8 ký tự");
+      throw bad("Mật khẩu tối thiểu 8 ký tự", {
+        password: "Mật khẩu tối thiểu 8 ký tự",
+      });
     u.passwordHash = await bcrypt.hash(body.password, 10);
   }
   await u.save();

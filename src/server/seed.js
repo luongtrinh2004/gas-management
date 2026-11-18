@@ -2125,6 +2125,21 @@ export async function seedIfEmpty({ password, force = false }) {
     { seq: pcSeq },
     { upsert: true },
   );
+  await Counter.findOneAndUpdate(
+    { key: "KH" },
+    { seq: custs.length },
+    { upsert: true },
+  );
+  await Counter.findOneAndUpdate(
+    { key: "NCC" },
+    { seq: sups.length },
+    { upsert: true },
+  );
+  await Counter.findOneAndUpdate(
+    { key: "SP" },
+    { seq: products.length },
+    { upsert: true },
+  );
 
   // 15. NHẬT KÝ HOẠT ĐỘNG (AuditLog)
   await AuditLog.insertMany([
